@@ -3,6 +3,7 @@ import { NgModule, APP_INITIALIZER } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { LayoutModule } from '@angular/cdk/layout';
+import { HttpClientModule } from '@angular/common/http';
 // Modules
 import { AppRoutingModule } from './app-routing.module';
 import { MaterialModule } from './material.module';
@@ -23,8 +24,9 @@ export function configLoginUser(provider: AuthService) {
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
-    MaterialModule,
+    HttpClientModule,
     LayoutModule,
+    MaterialModule,
   ],
   providers: [
     {

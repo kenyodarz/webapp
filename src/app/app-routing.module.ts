@@ -5,13 +5,22 @@ import { LoginComponent } from './components/login/login.component';
 import { LoginAdminGuard } from './guards/login-admin.guard';
 
 const routes: Routes = [
-  {path: "login", component: LoginComponent},
-  {path: "dashboard", component: DashboardComponent, canActivate: [LoginAdminGuard]}
-  {path: "", pathMatch: "full", redirectTo: "dashboard"}
+  { path: 'login', component: LoginComponent },
+  {
+    path: 'resume',
+    component: DashboardComponent,
+    canActivate: [LoginAdminGuard],
+  },
+  {
+    path: '**',
+    pathMatch: 'full',
+    redirectTo: 'resume',
+    canActivate: [LoginAdminGuard],
+  },
 ];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
-  exports: [RouterModule]
+  exports: [RouterModule],
 })
-export class AppRoutingModule { }
+export class AppRoutingModule {}
