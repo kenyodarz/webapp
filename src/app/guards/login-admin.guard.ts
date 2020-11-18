@@ -1,15 +1,20 @@
 import { Injectable } from '@angular/core';
-import { CanActivate, ActivatedRouteSnapshot, RouterStateSnapshot, UrlTree } from '@angular/router';
-import { Observable } from 'rxjs';
+import { CanActivate } from '@angular/router';
+
+import { TokenStorageService } from "src/app/services/token-storage.service";
 
 @Injectable({
   providedIn: 'root'
 })
 export class LoginAdminGuard implements CanActivate {
+  constructor(private token: TokenStorageService){}
   canActivate(
-    route: ActivatedRouteSnapshot,
-    state: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
-    return true;
+    ) {
+      const token = this.token.getToken();
+      if (token) {
+        return true;
+      } else {
+        return false
+      }
   }
-  
 }
