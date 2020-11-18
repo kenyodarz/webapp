@@ -5,14 +5,23 @@ import { PageNotFoundComponent } from './components/page-not-found/page-not-foun
 import { LoginAdminGuard } from './guards/login-admin.guard';
 
 const routes: Routes = [
-  { path: 'login', component: LoginComponent },
   {
-    path: 'resume',
-    loadChildren: () =>
-      import('./components/admin/admin.module').then((m) => m.AdminModule),
-    canActivate: [LoginAdminGuard],
+    path: '',
+    children: [
+      { path: '', redirectTo: 'resume', pathMatch: 'full' },
+      { path: 'login', component: LoginComponent },
+      {
+        path: 'resume',
+        loadChildren: () =>
+          import('./components/admin/admin.module').then((m) => m.AdminModule),
+        canActivate: [LoginAdminGuard],
+      },
+    ],
   },
-  { path: '**', component: PageNotFoundComponent },
+  {
+    path: '**',
+    component: PageNotFoundComponent
+  },
 ];
 
 @NgModule({
