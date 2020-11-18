@@ -25,17 +25,24 @@ export class AuthService {
   }
 
   loginUser(credential: any) {
-    new Promise((accept, reject) => {
-      for (let index = 0; index < this.data.length; index++) {
-        const element = this.data[index];
-        if (
-          element.email === credential.email &&
-          element.password === credential.password
-        ) {
-          return accept('Login Correcto');
-        }
+    let isLogin: boolean = false;
+    for (let index = 0; index < this.data.length; index++) {
+      const element = this.data[index];
+      console.log(element);
+      if (
+        element.username === credential.username &&
+        element.password === credential.password
+      ) {
+        isLogin = true;
       }
-      return reject('Login Incorrecto');
+    }
+    console.log(isLogin !== false);
+    return new Promise((accept, reject) => {
+      if (isLogin) {
+        accept('Login Correcto');
+      } else {
+        reject('Login Incorrecto');
+      }
     });
   }
 
